@@ -9,3 +9,5 @@ Updated in September 2012 for use on PIC32 architecture (chipKIT/MPIDE)
 For more information on the shield, please visit https://learn.adafruit.com/adafruit-motor-shield
 
 To install, click DOWNLOAD SOURCE in the top right corner, and see our tutorial at http://www.ladyada.net/library/arduino/libraries.html on Arduino Library installation
+
+Using the old library and their existen components, it will be added an option that you can use an arduino leonardo with ATmega32u4 and ATmega16u4
