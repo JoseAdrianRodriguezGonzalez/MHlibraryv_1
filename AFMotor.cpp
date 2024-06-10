@@ -259,6 +259,11 @@ inline void initPWM3(uint8_t freq) {
     TCCR4B = (freq & 0x7) | _BV(WGM12);
     //TCCR4B = 1 | _BV(WGM12);
     OCR4A = 0;
+#elif defined (__AVR_ATmega32U4)
+      //PIN 6 PB6
+      TCCR4C |=_BV(COM4D0)|_BV(PWM4D);
+      TCCR4B = freq & 0x7 ;
+      OCR4D=0;
 #elif defined(__AVR_ATmega32u4__) || defined(__AVR_ATmega16u4)
 #elif defined(__PIC32MX__)
     if (!MC.TimerInitalized)
@@ -289,6 +294,9 @@ inline void setPWM3(uint8_t s) {
 #elif defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
     // on arduino mega, pin 6 is now PH3 (OC4A)
     OCR4A = s;
+#elif defined (__AVR_ATmega32U4)
+    //PIN 6 on arduino leonardo
+    OCR4D=s;
 #elif defined(__PIC32MX__)
     // Set the OC3 (pin 6) PMW duty cycle from 0 to 255
     OC3RS = s;
