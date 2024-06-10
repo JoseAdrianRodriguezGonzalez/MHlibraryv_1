@@ -264,7 +264,6 @@ inline void initPWM3(uint8_t freq) {
       TCCR4C |=_BV(COM4D0)|_BV(PWM4D);
       TCCR4B = freq & 0x7 ;
       OCR4D=0;
-#elif defined(__AVR_ATmega32u4__) || defined(__AVR_ATmega16u4)
 #elif defined(__PIC32MX__)
     if (!MC.TimerInitalized)
     {   // Set up Timer2 for 80MHz counting fro 0 to 256
@@ -323,6 +322,10 @@ inline void initPWM4(uint8_t freq) {
     TCCR3B = (freq & 0x7) | _BV(WGM12);
     //TCCR4B = 1 | _BV(WGM12);
     OCR3A = 0;
+#elif defined (__AVR_ATmega32U4)
+    TCCR3A |= _BV(COM3A1) |_BV(WGM30); 
+    TCCR3B =  (PWM_Rate & 0x07)|_BV(WGM32); 
+    OCR3A = 0; 
 #elif defined(__PIC32MX__)
     if (!MC.TimerInitalized)
     {   // Set up Timer2 for 80MHz counting fro 0 to 256
@@ -351,6 +354,8 @@ inline void setPWM4(uint8_t s) {
     OCR0B = s;
 #elif defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
     // on arduino mega, pin 6 is now PH3 (OC4A)
+    OCR3A = s;
+#elif defined (__AVR_ATmega32U4)
     OCR3A = s;
 #elif defined(__PIC32MX__)
     // Set the OC2 (pin 5) PMW duty cycle from 0 to 255
