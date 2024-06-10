@@ -140,6 +140,10 @@
 #define MOTORENABLE 7
 #define MOTORDATA 8
 
+/**
+ * This class is just to put the register
+ * 
+ */
 class AFMotorController
 {
   public:
@@ -149,7 +153,7 @@ class AFMotorController
     void latch_tx(void);
     uint8_t TimerInitalized;
 };
-
+/**This is important*/
 class AF_DCMotor
 {
  public:

@@ -23,7 +23,10 @@ uint8_t microstepcurve[] = {0, 50, 98, 142, 180, 212, 236, 250, 255};
 #elif (MICROSTEPS == 16)
 uint8_t microstepcurve[] = {0, 25, 50, 74, 98, 120, 141, 162, 180, 197, 212, 225, 236, 244, 250, 253, 255};
 #endif
-
+/****
+ * This section is just for the register
+ * 
+*/
 AFMotorController::AFMotorController(void) {
     TimerInitalized = false;
 }
@@ -98,7 +101,7 @@ inline void initPWM1(uint8_t freq) {
     TCCR1B = (freq & 0x7) | _BV(WGM12);
     OCR1A = 0;
 #elif defined(__AVR_ATmega32u4__) || defined (__AVR_ATmega16u4__)//modified
-
+  //This on I'll need to modify
 #elif defined(__PIC32MX__)
     #if defined(PIC32_USE_PIN9_FOR_M1_PWM)
         // Make sure that pin 11 is an input, since we have tied together 9 and 11
