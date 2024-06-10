@@ -100,10 +100,10 @@ inline void initPWM1(uint8_t freq) {
     TCCR1A |= _BV(COM1A1) | _BV(WGM10); // fast PWM, turn on oc1a
     TCCR1B = (freq & 0x7) | _BV(WGM12);
     OCR1A = 0;
-#elif defined(__AVR_ATmega32u4__) || defined (__AVR_ATmega16u4__)//modified
+#elif defined(__AVR_ATmega32U4__) //modified
   //This on I'll need to modify
   TCCR0A |=_BV(COM0A1)| _BV (WGM01)| _BV (WGM00); 
-  TCCR1B = freq & 0x7 | _BV (WGM02);
+  TCCR0B = freq & 0x7 ;
   OCR0A=0;
 #elif defined(__PIC32MX__)
     #if defined(PIC32_USE_PIN9_FOR_M1_PWM)
@@ -159,8 +159,8 @@ inline void setPWM1(uint8_t s) {
 #elif defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
     // on arduino mega, pin 11 is now PB5 (OC1A)
     OCR1A = s;
-#elif defined(__AVR_ATmega32u4__) || defined (__AVR_ATmega16u4__)
-    OCR1A=s;
+#elif defined(__AVR_ATmega32U4__) 
+    OCR0A=s;
 #elif defined(__PIC32MX__)
     #if defined(PIC32_USE_PIN9_FOR_M1_PWM)
         // Set the OC4 (pin 9) PMW duty cycle from 0 to 255
@@ -199,6 +199,10 @@ inline void initPWM2(uint8_t freq) {
     TCCR3A |= _BV(COM1C1) | _BV(WGM10); // fast PWM, turn on oc3c
     TCCR3B = (freq & 0x7) | _BV(WGM12);
     OCR3C = 0;
+#elif defined(__AVR_ATmega32U4__)
+    TCCR0A |=_BV(COM0B1)| _BV (WGM01)| _BV (WGM00);
+    TCCR0B = freq & 0x7 ;
+    OCR0B=0;
 #elif defined(__PIC32MX__)
     if (!MC.TimerInitalized)
     {   // Set up Timer2 for 80MHz counting fro 0 to 256
@@ -229,6 +233,8 @@ inline void setPWM2(uint8_t s) {
 #elif defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
     // on arduino mega, pin 11 is now PB5 (OC1A)
     OCR3C = s;
+#elif defined(__AVR_ATmega32U4__)
+    OCR0B=s;
 #elif defined(__PIC32MX__)
     // Set the OC1 (pin3) PMW duty cycle from 0 to 255
     OC1RS = s;
@@ -253,6 +259,7 @@ inline void initPWM3(uint8_t freq) {
     TCCR4B = (freq & 0x7) | _BV(WGM12);
     //TCCR4B = 1 | _BV(WGM12);
     OCR4A = 0;
+#elif defined(__AVR_ATmega32u4__) || defined(__AVR_ATmega16u4)
 #elif defined(__PIC32MX__)
     if (!MC.TimerInitalized)
     {   // Set up Timer2 for 80MHz counting fro 0 to 256
