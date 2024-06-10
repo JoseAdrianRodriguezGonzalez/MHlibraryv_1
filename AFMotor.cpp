@@ -102,6 +102,9 @@ inline void initPWM1(uint8_t freq) {
     OCR1A = 0;
 #elif defined(__AVR_ATmega32u4__) || defined (__AVR_ATmega16u4__)//modified
   //This on I'll need to modify
+  TCCR0A |=_BV(COM0A1)| _BV (WGM01)| _BV (WGM00); 
+  TCCR1B = freq & 0x7 | _BV (WGM02);
+  OCR0A=0;
 #elif defined(__PIC32MX__)
     #if defined(PIC32_USE_PIN9_FOR_M1_PWM)
         // Make sure that pin 11 is an input, since we have tied together 9 and 11
@@ -156,6 +159,8 @@ inline void setPWM1(uint8_t s) {
 #elif defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
     // on arduino mega, pin 11 is now PB5 (OC1A)
     OCR1A = s;
+#elif defined(__AVR_ATmega32u4__) || defined (__AVR_ATmega16u4__)
+    OCR1A=s;
 #elif defined(__PIC32MX__)
     #if defined(PIC32_USE_PIN9_FOR_M1_PWM)
         // Set the OC4 (pin 9) PMW duty cycle from 0 to 255
