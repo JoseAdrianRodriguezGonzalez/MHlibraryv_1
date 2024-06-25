@@ -12,3 +12,5 @@ To install, click DOWNLOAD SOURCE in the top right corner, and see our tutorial 
 
 Using the old library and their existen components, it will be added an option that you can use an arduino leonardo with ATmega32u4.
 Now it just need the parto for the stepper motor
+
+Due to the original authors will not update the original repository, at this repository will want to find out a way that can be searched by more people
