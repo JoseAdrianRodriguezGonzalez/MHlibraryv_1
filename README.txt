@@ -10,4 +10,5 @@ For more information on the shield, please visit https://learn.adafruit.com/adaf
 
 To install, click DOWNLOAD SOURCE in the top right corner, and see our tutorial at http://www.ladyada.net/library/arduino/libraries.html on Arduino Library installation
 
-Using the old library and their existen components, it will be added an option that you can use an arduino leonardo with ATmega32u4 and ATmega16u4
+Using the old library and their existen components, it will be added an option that you can use an arduino leonardo with ATmega32u4.
+Now it just need the parto for the stepper motor
